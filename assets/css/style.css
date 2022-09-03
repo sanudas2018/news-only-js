@@ -1,0 +1,61 @@
+/* all fonts load  */
+
+@font-face{
+   src:url(../fonts/google-font/Poppins-Bold.ttf);
+   font-family: Poppins-Bold;
+}
+@font-face{
+   src:url(../fonts/google-font/Roboto-Medium.ttf);
+   font-family: Roboto-Medium;
+}
+@font-face{
+   src:url(../fonts/google-font/BebasNeue-Regular.ttf);
+   font-family: BebasNeue-Regular;
+}
+@font-face{
+   src:url(../fonts/google-font/Cookie-Regular.ttf);
+   font-family: Cookie-Regular;
+}
+
+body{
+   background-color: rgba(27, 26, 26, 0.875);
+}
+*{
+   margin: 0px;
+   padding: 0px;
+}
+a{
+   text-decoration: none;
+}
+/* .container{
+   width: 90%;
+   margin: 0px auto;
+} */
+h1,
+h2,
+h3{
+   font-family: Poppins-Bold;
+   color: rgb(8, 17, 64);
+}
+h1{
+   color: #FF5E19;
+   font-size: 50px;
+}
+p{
+   font-family:  Arial, Helvetica, sans-serif;
+   color: white;
+}
+
+
+
+.athor-image{
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+}
+.header-link:hover{
+   transition: 0.5s;
+   font-weight: bold !important;
+   color: aquamarine !important;
+
+}
