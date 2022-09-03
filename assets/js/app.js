@@ -33,15 +33,18 @@ const showAllNewHeader = async () => {
 
 };
 
-const showAllNewDetails = (link) => {
+const showAllNewDetails = async (link) => {
    toggleLoading(true)
    let linkString = "0" + link;
-
+   // console.log(linkString);
    const url = `https://openapi.programming-hero.com/api/news/category/${linkString}`;
    try {
-      fetch(url)
-         .then(res => res.json())
-         .then(data => displayAllNews(data.data))
+      // fetch(url)
+      //    .then(res => res.json())
+      //    .then(data => displayAllNews(data.data))
+      const res = await fetch(url);
+      const data = await res.json();
+      return displayAllNews(data.data);
    } catch (error) {
       alert(error);
    }
@@ -49,15 +52,52 @@ const showAllNewDetails = (link) => {
 
 };
 
-const displayAllNews = (data) => {
+const displayAllNews = async (data) => {
    const newsBody = document.getElementById("news-body");
    newsBody.textContent = '';
-   console.log(data)
+   let getLengthCategory = data.length == [] ? 0 : data.length;
+   console.log(getLengthCategory);
+   let getCategoryId = data.length == 0 ? 0 : data[0].category_id;
+   // if (data.length == []) {
+   //    console.log('ami khali');
+   // } else {
+   //    console.log('ami vora');
+   // }
+
+   console.log(getCategoryId);
+   console.log(data);
+   if (getCategoryId == 1 && getLengthCategory == 26) {
+      lengthAndCategoryShow(getLengthCategory, 'All News');
+
+   } else if (getCategoryId == 2) {
+      lengthAndCategoryShow(getLengthCategory, 'Regular News')
+   } else if (getCategoryId == 3) {
+      lengthAndCategoryShow(getLengthCategory, 'International News')
+   } else if (getCategoryId == 4) {
+      lengthAndCategoryShow(getLengthCategory, 'Sports')
+   } else if (getCategoryId == 5) {
+      lengthAndCategoryShow(getLengthCategory, 'Entertainment')
+   } else if (getCategoryId == 0) {
+      lengthAndCategoryShow(getLengthCategory, 'Culture')
+   } else if (getCategoryId == 7) {
+      lengthAndCategoryShow(getLengthCategory, 'Arts')
+   } else if (getCategoryId == 1) {
+      lengthAndCategoryShow(getLengthCategory, 'breaking News')
+   }
+
+   // const allData = await loadAllNewHeader();
+   // const newAllData = allData.data.news_category;
+
+   // console.log(newAllData);
+   // for (const id of newAllData) {
+   //    console.log(id.category_id)
+   // }
+
 
 
    setTimeout(() => {
       data.forEach(allNews => {
-         // console.log(allNews._id);
+         // console.log(allNews.length);
          const createDiv = document.createElement("div");
          createDiv.classList.add("row", "g-0", "mb-4", "shadow");
          createDiv.innerHTML = `
@@ -189,5 +229,16 @@ const toggleLoading = (isLoading) => {
 
    }
 };
+// Length show in top header
+const lengthAndCategoryShow = (length = 0, category) => {
+   const itemsLength = document.getElementById('items-length');
+   itemsLength.innerHTML = '';
+   const createDiv = document.createElement('div');
+   createDiv.classList.add("bg-white", "pt-4", "ps-4", "pb-2", "rounded-pill");
+   createDiv.innerHTML = `
+      <p class="fw-bold fs-5"> ${length} items found for category ${category}</p>
+   `;
+   itemsLength.appendChild(createDiv);
+}
 
 showAllNewHeader()
