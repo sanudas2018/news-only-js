@@ -30,9 +30,11 @@ const showAllNewHeader = async () => {
       }
 
    }
+
 };
 
 const showAllNewDetails = (link) => {
+   toggleLoading(true)
    let linkString = "0" + link;
 
    const url = `https://openapi.programming-hero.com/api/news/category/${linkString}`;
@@ -51,58 +53,64 @@ const displayAllNews = (data) => {
    const newsBody = document.getElementById("news-body");
    newsBody.textContent = '';
    console.log(data)
-   data.forEach(allNews => {
-      // console.log(allNews._id);
-      const createDiv = document.createElement("div");
-      createDiv.classList.add("row", "g-0", "mb-4", "shadow");
-      createDiv.innerHTML = `
-         <div class="col-md-3 ">
-               <img src="${allNews.thumbnail_url ? allNews.thumbnail_url : 'NO IMAGE FOUND'}" class="img-fluid rounded-start" alt="news image">
-            </div>
-            <div class="col-md-9">
-               <div class="card-body mt-3">
-                  <h5 class="card-title">${allNews.title}</h5>
-                  <p class="card-text mt-4">${allNews.details.length > 20 ? allNews.details.slice(0,250) + ' ...' : allNews.details}</p>
-                  
-                  
-                  <div class="row mt-5">
-                        <div class="col-md-5 d-flex flex-row justify-content-between align-content-center">
-                           <div class="col-md-4">
-                              <img class="w-75 h-75 rounded-circle" src="${allNews.author.img}" alt="">
-                           </div>
-                           <div class="col-md-8">
-                              <h6>${allNews.author.name == null || allNews.author.name == '' ? 'NOT FOUND NAME' : allNews.author.name }</h6>
-                              <p class="text-dark"><small>${allNews.author.published_date == null ? 'NO Found Date' : allNews.author.published_date}</small></p>
-                           </div>
-                        </div>
-                        <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
-                           <p class="text-warning"><i class="fa-regular fa-eye"></i>
-                              <span>${allNews.rating.number} M</span>
-                           </p>
-                        </div>
-                        <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
-                           <p class="text-warning">
-                              <i class="fa-solid fa-star-half-stroke"></i>
-                              <i class="fa-regular fa-star"></i>
-                              <i class="fa-regular fa-star"></i>
-                              <i class="fa-regular fa-star"></i>
-                              <i class="fa-regular fa-star"></i>
-                           </p>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column justify-content-center align-content-center  flex-wrap">
-                           <button onclick= showSingleNews('${allNews._id}') class="btn btn-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
-                        </div>
-                     </div>
-                  
+
+
+   setTimeout(() => {
+      data.forEach(allNews => {
+         // console.log(allNews._id);
+         const createDiv = document.createElement("div");
+         createDiv.classList.add("row", "g-0", "mb-4", "shadow");
+         createDiv.innerHTML = `
+            <div class="col-md-3 ">
+                  <img src="${allNews.thumbnail_url ? allNews.thumbnail_url : 'NO IMAGE FOUND'}" class="img-fluid rounded-start" alt="news image">
                </div>
-         </div>
-      
-   `;
-      newsBody.appendChild(createDiv);
-   });
+               <div class="col-md-9">
+                  <div class="card-body mt-3">
+                     <h5 class="card-title">${allNews.title}</h5>
+                     <p class="card-text mt-4">${allNews.details.length > 20 ? allNews.details.slice(0,250) + ' ...' : allNews.details}</p>
+                     
+                     
+                     <div class="row mt-5">
+                           <div class="col-md-5 d-flex flex-row justify-content-between align-content-center">
+                              <div class="col-md-4">
+                                 <img class="w-75 h-75 rounded-circle" src="${allNews.author.img}" alt="">
+                              </div>
+                              <div class="col-md-8">
+                                 <h6>${allNews.author.name == null || allNews.author.name == '' ? 'NOT FOUND NAME' : allNews.author.name }</h6>
+                                 <p class="text-dark"><small>${allNews.author.published_date == null ? 'NO Found Date' : allNews.author.published_date}</small></p>
+                              </div>
+                           </div>
+                           <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                              <p class="text-warning"><i class="fa-regular fa-eye"></i>
+                                 <span>${allNews.rating.number} M</span>
+                              </p>
+                           </div>
+                           <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                              <p class="text-warning">
+                                 <i class="fa-solid fa-star-half-stroke"></i>
+                                 <i class="fa-regular fa-star"></i>
+                                 <i class="fa-regular fa-star"></i>
+                                 <i class="fa-regular fa-star"></i>
+                                 <i class="fa-regular fa-star"></i>
+                              </p>
+                           </div>
+                           <div class="col-md-3 d-flex flex-column justify-content-center align-content-center  flex-wrap">
+                              <button onclick= showSingleNews('${allNews._id}') class="btn btn-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
+                           </div>
+                        </div>
+                     
+                  </div>
+            </div>
+         
+      `;
+         newsBody.appendChild(createDiv);
+      });
+   }, 500)
+   // STOP LOADING
+   toggleLoading(false)
 };
 
-// Single News Details with model 
+// Single News Details With Model 
 const showSingleNews = (singleData) => {
    const url = `https://openapi.programming-hero.com/api/news/${singleData}`;
    fetch(url)
@@ -164,7 +172,6 @@ const singleNewsDetails = (data) => {
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
          </div>
       
    `;
@@ -172,5 +179,15 @@ const singleNewsDetails = (data) => {
 };
 
 // displayAllNews();
+// spinner add 
+const toggleLoading = (isLoading) => {
+   const spinnerId = document.getElementById('loader');
+   if (isLoading) {
+      spinnerId.classList.remove('d-none');
+   } else {
+      spinnerId.classList.add('d-none')
+
+   }
+};
 
 showAllNewHeader()
