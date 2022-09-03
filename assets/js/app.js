@@ -56,16 +56,14 @@ const displayAllNews = async (data) => {
    const newsBody = document.getElementById("news-body");
    newsBody.textContent = '';
    let getLengthCategory = data.length == [] ? 0 : data.length;
-   console.log(getLengthCategory);
+   // console.log(getLengthCategory);
    let getCategoryId = data.length == 0 ? 0 : data[0].category_id;
-   // if (data.length == []) {
-   //    console.log('ami khali');
-   // } else {
-   //    console.log('ami vora');
-   // }
 
-   console.log(getCategoryId);
-   console.log(data);
+   // console.log(data);
+   // All Data sort and top view data show now 
+   const newData = [...data].sort((a, b) => b.total_view - a.total_view);
+   // console.log(newData);
+
    if (getCategoryId == 1 && getLengthCategory == 26) {
       lengthAndCategoryShow(getLengthCategory, 'All News');
 
@@ -85,21 +83,12 @@ const displayAllNews = async (data) => {
       lengthAndCategoryShow(getLengthCategory, 'breaking News')
    }
 
-   // const allData = await loadAllNewHeader();
-   // const newAllData = allData.data.news_category;
-
-   // console.log(newAllData);
-   // for (const id of newAllData) {
-   //    console.log(id.category_id)
-   // }
-
-
 
    setTimeout(() => {
-      data.forEach(allNews => {
-         // console.log(allNews.length);
+      newData.forEach(allNews => {
+         console.log(allNews);
          const createDiv = document.createElement("div");
-         createDiv.classList.add("row", "g-0", "mb-4", "shadow");
+         createDiv.classList.add("row", "g-0", "mb-4", "shadow", "p-2");
          createDiv.innerHTML = `
             <div class="col-md-3 ">
                   <img src="${allNews.thumbnail_url ? allNews.thumbnail_url : 'NO IMAGE FOUND'}" class="img-fluid rounded-start" alt="news image">
