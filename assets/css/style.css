@@ -70,6 +70,38 @@ p{
 .container{
    padding: 0px 0px !important;
 }
+
+/* ......news body ..........  */
+.news-body{
+   margin-bottom: 100px !important;
+}
+/* ...... blog section ..........   */
+.blog-body{
+   margin-bottom: 150px;
+}
+/* ------------------ START FOOTER PART ----------------- */
+footer{
+   width: 100%;
+   padding: 10px 0px;
+   background-color: rgba(232, 221, 221, 0.962);
+   /* margin-top: 100px; */
+}
+.mid-container{
+   width: 500px;
+   display: block;
+   margin: 0px auto;
+}
+
+
+.mid-container p{
+   color: rgba(30, 29, 29, 0.701);
+   font-size: 13px;
+   word-spacing: 2px;
+   letter-spacing: 2px;
+   text-align: center;
+}
+
+/* ------------------ END FOOTER PART ----------------- */ 
 /* sm media query  */
 @media only screen and (min-width:0px) and (max-width: 575px) {
    .font-sz{
