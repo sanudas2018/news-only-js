@@ -63,3 +63,36 @@ p{
 .model-img{
    height: 250px;
 }
+.img-height{
+   height: 100% !important;
+
+}
+.container{
+   padding: 0px 0px !important;
+}
+/* sm media query  */
+@media only screen and (min-width:0px) and (max-width: 575px) {
+   .font-sz{
+      font-size: 12px !important;
+   }
+   #author-img img{
+      width: 60px !important;
+      height: 60px !important;
+   }
+   .author-name{
+      /* margin-top: 10px; */
+      margin-left: 2px;
+   }
+   .show-length {
+      width: 95%;
+
+   }
+   .show-length p{
+      font-size: 14px !important;
+      text-align: center;
+      padding-left: 10px !important;
+   }
+   #items-length{
+      margin: 0px auto;
+   }
+}

@@ -91,7 +91,8 @@ const displayAllNews = async (data) => {
          createDiv.classList.add("row", "g-0", "mb-4", "shadow", "p-2");
          createDiv.innerHTML = `
             <div class="col-md-3 ">
-                  <img src="${allNews.thumbnail_url ? allNews.thumbnail_url : 'NO IMAGE FOUND'}" class="img-fluid rounded-start" alt="news image">
+               
+                  <img src="${allNews.thumbnail_url ? allNews.image_url : 'NO IMAGE FOUND'}" class="img-fluid rounded-start img-height" alt="news image">
                </div>
                <div class="col-md-9">
                   <div class="card-body mt-3">
@@ -99,22 +100,22 @@ const displayAllNews = async (data) => {
                      <p class="card-text mt-4">${allNews.details.length > 20 ? allNews.details.slice(0,250) + ' ...' : allNews.details}</p>
                      
                      
-                     <div class="row mt-5">
-                           <div class="col-md-5 d-flex flex-row justify-content-between align-content-center">
-                              <div class="col-md-4">
-                                 <img class="w-75 h-75 rounded-circle" src="${allNews.author.img}" alt="">
+                     <div class="row mt-5 mt-sm-3">
+                           <div class="col-md-5 p-md-0 col-sm-5 col-9 d-flex flex-row justify-content-between align-content-center" id="author-img">
+                              <div class="col-md-4 col-sm-4 col-4">
+                                 <img class="w-75 h-75 rounded-circle author-img" src="${allNews.author.img}" alt="">
                               </div>
-                              <div class="col-md-8">
+                              <div class="col-md-8 col-sm-9 col-8 p-0 author-name">
                                  <h6>${allNews.author.name == null || allNews.author.name == '' ? 'NOT FOUND NAME' : allNews.author.name }</h6>
                                  <p class="text-dark"><small>${allNews.author.published_date == null ? 'NO Found Date' : allNews.author.published_date}</small></p>
                               </div>
                            </div>
-                           <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                           <div class="col-md-2 col-sm-3 p-md-0 col-3 d-flex flex-column justify-content-center align-content-center flex-wrap">
                               <p class="text-warning"><i class="fa-regular fa-eye"></i>
                                  <span>${allNews.rating.number} M</span>
                               </p>
                            </div>
-                           <div class="col-md-2 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                           <div class="col-md-2 col-sm-4 col-12 p-md-0 d-flex flex-column justify-content-center align-content-center flex-wrap">
                               <p class="text-warning">
                                  <i class="fa-solid fa-star-half-stroke"></i>
                                  <i class="fa-regular fa-star"></i>
@@ -123,7 +124,7 @@ const displayAllNews = async (data) => {
                                  <i class="fa-regular fa-star"></i>
                               </p>
                            </div>
-                           <div class="col-md-3 d-flex flex-column justify-content-center align-content-center  flex-wrap">
+                           <div class="col-md-3 col-sm-12 col-12 d-flex flex-column justify-content-center align-content-center  flex-wrap">
                               <button onclick= showSingleNews('${allNews._id}') class="btn btn-info font-weight-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
                            </div>
                         </div>
@@ -170,21 +171,21 @@ const singleNewsDetails = (data) => {
            
 
            <div class="row mt-5">
-                        <div class="col-md-5 d-flex flex-row justify-content-between align-content-center">
-                           <div class="col-md-4">
+                        <div class="col-md-5 col-sm-5 col-9 d-flex flex-row justify-content-between align-content-center id="author-img"">
+                           <div class="col-md-4 col-sm-4 col-4"">
                               <img class="w-75 h-75 rounded-circle" src="${data.author.img}" alt="">
                            </div>
-                           <div class="col-md-8">
+                           <div class="col-md-8 col-sm-9 col-8 p-0 author-name">
                               <h6>${data.author.name == '' || data.author.name == null ? 'NO DATA FOUND' : data.author.name}</h6>
                               <p class="text-dark"><small>${data.author.published_date == null ? 'NO Found Date' : data.author.published_date}</small></p>
                            </div>
                         </div>
-                        <div class="col-md-3 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                        <div class="col-md-3 col-sm-3 col-3 d-flex p-0 flex-column justify-content-center align-content-center flex-wrap">
                            <p class="text-warning"><i class="fa-regular fa-eye"></i>
                               <span>${data.rating.number} M</span>
                            </p>
                         </div>
-                        <div class="col-md-4 d-flex flex-column justify-content-center align-content-center flex-wrap">
+                        <div class="col-md-4 col-sm-4 col-12 d-flex flex-column justify-content-center align-content-center flex-wrap">
                            <p class="text-warning">
                               <i class="fa-solid fa-star-half-stroke"></i>
                               <i class="fa-regular fa-star"></i>
@@ -223,9 +224,9 @@ const lengthAndCategoryShow = (length = 0, category) => {
    const itemsLength = document.getElementById('items-length');
    itemsLength.innerHTML = '';
    const createDiv = document.createElement('div');
-   createDiv.classList.add("bg-white", "pt-4", "ps-4", "pb-2", "rounded-pill");
+   createDiv.classList.add("bg-white", "pt-4", "ps-md-4", "pb-2", "rounded-pill", "show-length", "ps-lg-4", "ps-3", "text-sm-center");
    createDiv.innerHTML = `
-      <p class="fw-bold fs-5"> ${length} items found for category ${category}</p>
+      <p class="fw-bold fs-6 font-sz"> ${length} items found for category ${category}</p>
    `;
    itemsLength.appendChild(createDiv);
 }
